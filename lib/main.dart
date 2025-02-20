@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stock_dashboard/widgets/navbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -101,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     label: Text('Dashboard'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.cases),
+                    icon: Icon(Icons.cases_rounded),
                     label: Text('Portfolio'),
                   ),
                   NavigationRailDestination(
@@ -136,76 +137,173 @@ class _MyHomePageState extends State<MyHomePage> {
 class GeneratorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          spacing: 12,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            DashBoardHeader(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Welcome Back Arthur Sjorgen'),
-                  Text(
-                      'Happy to see you again, Get update of your asset today, good luck!!'),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Welcome Back Kunal Kothari',
+                        style: TextStyle(fontSize: 32),
+                      ),
+                      Text(
+                        'Happy to see you again, Get update of your asset today, good luck!!',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    label: Text('Download Report'),
+                    icon: Icon(Icons.cloud_download_outlined),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-              ElevatedButton.icon(
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: OverviewCard(
+                      title: 'Card title',
+                      amount: 489237,
+                      iconName: Icons.attach_money,
+                      percentChange: 4.23,
+                      amountChange: 123),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: OverviewCard(
+                      title: 'Card title',
+                      amount: 489237,
+                      iconName: Icons.attach_money,
+                      percentChange: 4.23,
+                      amountChange: 123),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: OverviewCard(
+                      title: 'Card title',
+                      amount: 489237,
+                      iconName: Icons.attach_money,
+                      percentChange: 4.23,
+                      amountChange: 123),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InvestmentBreakdown(
+                  assets: [
+                    {
+                      'name': 'Money Market',
+                      'color': 'purple',
+                      'amount': 43242,
+                      'share': 32
+                    },
+                    {
+                      'name': 'Stocks',
+                      'color': 'cyan',
+                      'amount': 32342,
+                      'share': 23
+                    },
+                    {
+                      'name': 'Bonds',
+                      'color': 'orange',
+                      'amount': 14234,
+                      'share': 16
+                    },
+                    {
+                      'name': 'Banks',
+                      'color': 'grey',
+                      'amount': 5421,
+                      'share': 35
+                    },
+                    {
+                      'name': 'Crypto',
+                      'color': 'pink',
+                      'amount': 8913,
+                      'share': 9
+                    }
+                  ],
+                ),
+                Expanded(
+                  child: InvestmentStatistics(),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(child: InvestmentAssets()),
+                SavingsPlan(),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DashBoardHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text("Input Field"),
+          Row(
+            spacing: 8,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              IconButton(
                 onPressed: () {},
-                label: Text('Download Report'),
-                icon: Icon(Icons.cloud_download_outlined),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
+                icon: Icon(Icons.notifications),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.message),
+              ),
+              SizedBox(
+                width: 200,
+                // child: Material(
+                child: ListTile(
+                  title: Text(
+                    'Kunal',
+                    style: TextStyle(fontSize: 12),
                   ),
+                  subtitle: Text(
+                    'Plan Type',
+                    style: TextStyle(fontSize: 8),
+                  ),
+                  trailing: Icon(Icons.keyboard_arrow_down),
+                  leading: Icon(Icons.person),
                 ),
               ),
+              // ),
             ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                flex: 1,
-                child: OverviewCard(
-                    title: 'Card title',
-                    amount: 489237,
-                    iconName: Icons.attach_money,
-                    percentChange: 4.23,
-                    amountChange: 123),
-              ),
-              Flexible(
-                flex: 1,
-                child: OverviewCard(
-                    title: 'Card title',
-                    amount: 489237,
-                    iconName: Icons.attach_money,
-                    percentChange: 4.23,
-                    amountChange: 123),
-              ),
-              Flexible(
-                flex: 1,
-                child: OverviewCard(
-                    title: 'Card title',
-                    amount: 489237,
-                    iconName: Icons.attach_money,
-                    percentChange: 4.23,
-                    amountChange: 123),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InvestmentBreakdown(),
-              Expanded(
-                child: InvestmentStatistics(),
-              ),
-            ],
-          ),
-          Text('HEllo line 3'),
+          )
         ],
       ),
     );
@@ -259,12 +357,12 @@ class OverviewCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
+          spacing: 30,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [Text(title), Icon(iconName)],
             ),
-            SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [Text('\$$amount'), Text('Change')],
@@ -277,14 +375,60 @@ class OverviewCard extends StatelessWidget {
 }
 
 class InvestmentBreakdown extends StatelessWidget {
+  const InvestmentBreakdown({required this.assets});
+  final List<Map<String, dynamic>> assets;
   @override
   Widget build(BuildContext context) {
     return Card.outlined(
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Hello Investement stats'),
+            SizedBox(
+              width: 300,
+              child: ListTile(
+                contentPadding: EdgeInsets.all(0),
+                title: Text(
+                  'Investment Details',
+                  style: TextStyle(fontSize: 12),
+                ),
+                subtitle: Text(
+                  'Assets you have in your account',
+                  style: TextStyle(fontSize: 8),
+                ),
+                trailing: Icon(Icons.more_vert_outlined),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('\$83279'),
+                Text('Change'),
+              ],
+            ),
+            SizedBox(
+              height: 300,
+              width: 300,
+              child: ListView.builder(
+                itemCount: assets.length,
+                itemBuilder: (context, index) {
+                  final asset = assets[index];
+                  return ListTile(
+                    title: Text(asset['name']),
+                    leading: Icon(Icons.circle),
+                    trailing: Row(
+                      spacing: 8,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('\$${asset['amount']}'),
+                        Chip(label: Text('${asset['share']}%')),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -298,7 +442,119 @@ class InvestmentStatistics extends StatelessWidget {
     return Card.outlined(
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Text('Investment Statistics'),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      'Investment Statistics',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      'Revealing risk, and growth in investments.',
+                      style: TextStyle(fontSize: 8),
+                    ),
+                  ],
+                ),
+                NavBar(),
+              ],
+            ),
+            Text('Navbar Chart'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class InvestmentAssets extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card.outlined(
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Text('Investment Aasets'),
+      ),
+    );
+  }
+}
+
+class SavingsPlan extends StatelessWidget {
+  final List savingsPlan = [
+    {
+      "title": "Retirement Plan",
+      "time": 2045,
+      "amount": 89327,
+      "progress": 63,
+      "icon": Icon(Icons.money)
+    },
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Card.outlined(
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: [
+            SizedBox(
+              width: 300,
+              child: ListTile(
+                contentPadding: EdgeInsets.all(0),
+                title: Text(
+                  'My Savings Plan',
+                  style: TextStyle(fontSize: 12),
+                ),
+                subtitle: Text(
+                  'Saving plan based on your needs',
+                  style: TextStyle(fontSize: 8),
+                ),
+                trailing: Icon(Icons.more_vert_outlined),
+              ),
+            ),
+            ...savingsPlan.map((plan) {
+              int index = savingsPlan.indexOf(plan);
+              return Card.outlined(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 8,
+                    children: [
+                      SizedBox(
+                        width: 300,
+                        height: 50,
+                        child: ListTile(
+                          contentPadding: EdgeInsets.all(0),
+                          leading: plan['icon'],
+                          title: Text(
+                            plan['title'],
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          subtitle: Text(
+                            'Finished in ${plan['time']}',
+                            style: TextStyle(fontSize: 8),
+                          ),
+                          trailing: Text('\$${plan['amount']}'),
+                        ),
+                      ),
+                      Text('Hello card'),
+                     SizedBox(
+                      width: 100,
+                       child: LinearProgressIndicator(
+                        value: 0.3,
+                       ),
+                     ),
+                    ],
+                  ),
+                ),
+              );
+            }),
+          ],
+        ),
       ),
     );
   }
