@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../cards/invest_assets.dart';
+import '../cards/invest_details.dart';
+import '../cards/invest_stats.dart';
+import '../cards/overview_card.dart';
+import '../cards/savings_plan.dart';
+import '../widgets/dash_header.dart';
+
 class DashboardPage extends StatelessWidget {
   final List investments = [
     {
@@ -62,11 +69,7 @@ class DashboardPage extends StatelessWidget {
                     onPressed: () {},
                     label: Text('Download Report'),
                     icon: Icon(Icons.cloud_download_outlined),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
+                    style: Theme.of(context).elevatedButtonTheme.style,
                   ),
                 ],
               ),
@@ -88,7 +91,7 @@ class DashboardPage extends StatelessWidget {
                 children: [
                   Flexible(
                     flex: 1,
-                    child: InvestmentBreakdown(
+                    child: InvestmentDetails(
                       allAssets: {
                         "amount": 104152,
                         "changePercent": 4.52,
